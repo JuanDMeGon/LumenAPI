@@ -26,6 +26,46 @@ class ProfesorController extends Controller
 
 	public function store(Request $request)
 	{
+		$this->validacion($request);
+
+		Profesor::create($request->all());
+
+		return $this->crearRespuesta('El profesor ha sido creado', 201);
+	}
+
+	public function update(Request $request, $profesor_id)
+	{
+		$profesor = Profesor::find($profesor_id);
+
+		if($profesor)
+		{
+			$this->validacion($request);
+
+			$nombre = $request->get('nombre');
+			$direccion = $request->get('direccion');
+			$telefono = $request->get('telefono');
+			$profesion = $request->get('profesion');
+
+			$profesor->nombre = $nombre;
+			$profesor->direccion = $direccion;
+			$profesor->telefono = $telefono;
+			$profesor->profesion = $profesion;
+
+			$profesor->save();
+
+			return $this->crearRespuesta("El profesor $profesor->id has sido editado", 200);
+		}
+
+		return $this->crearRespuestaError('El id especificado no corresponde a un profesor', 404);
+	}
+
+	public function destroy()
+	{
+		return 'desde destroy en profesorcontroller';
+	}
+
+	public function validacion($request)
+	{
 		$reglas = 
 		[
 			'nombre' => 'required',
@@ -35,19 +75,5 @@ class ProfesorController extends Controller
 		];
 
 		$this->validate($request, $reglas);
-
-		Profesor::create($request->all());
-
-		return $this->crearRespuesta('El profesor ha sido creado', 201);
-	}
-
-	public function update()
-	{
-		return 'desde update en profesorcontroller';
-	}
-
-	public function destroy()
-	{
-		return 'desde destroy en profesorcontroller';
 	}
 }
