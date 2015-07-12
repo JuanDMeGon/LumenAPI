@@ -2,6 +2,8 @@
 
 use App\Estudiante;
 
+use Illuminate\Http\Request;
+
 class EstudianteController extends Controller
 {
 	public function index()
@@ -22,9 +24,21 @@ class EstudianteController extends Controller
 		return $this->crearRespuestaError('Estudiante no encontrado', 404);
 	}
 
-	public function store()
+	public function store(Request $request)
 	{
-		return 'desde store en estudiantecontroller';
+		$reglas = 
+		[
+			'nombre' => 'required',
+			'direccion' => 'required',
+			'telefono' => 'required|numeric',
+			'carrera' => 'required|in:ingeniería,matemática,física',
+		];
+
+		$this->validate($request, $reglas);
+
+		Estudiante::create($request->all());
+
+		return $this->crearRespuesta('El estudiante ha sido creado', 201);
 	}
 
 	public function update()

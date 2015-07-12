@@ -2,6 +2,8 @@
 
 use App\Profesor;
 
+use Illuminate\Http\Request;
+
 class ProfesorController extends Controller
 {
 	public function index()
@@ -22,9 +24,21 @@ class ProfesorController extends Controller
 		return $this->crearRespuestaError('Profesor no encontrado', 404);
 	}
 
-	public function store()
+	public function store(Request $request)
 	{
-		return 'desde store en profesorcontroller';
+		$reglas = 
+		[
+			'nombre' => 'required',
+			'direccion' => 'required',
+			'telefono' => 'required|numeric',
+			'profesion' => 'required|in:ingeniería,matemática,física',
+		];
+
+		$this->validate($request, $reglas);
+
+		Profesor::create($request->all());
+
+		return $this->crearRespuesta('El profesor ha sido creado', 201);
 	}
 
 	public function update()
