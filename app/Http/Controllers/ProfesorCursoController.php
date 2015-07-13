@@ -68,9 +68,28 @@ class ProfesorCursoController extends Controller
 		return $this->crearRespuestaError('No existe un profesor con el id dado', 404);
 	}
 
-	public function destroy()
+	public function destroy($profesor_id, $curso_id)
 	{
-		return 'desde destroy en profesorcursocontroller';
+		$profesor = Profesor::find($profesor_id);
+
+		if($profesor)
+		{
+			$cursos = $profesor->cursos();
+
+			if($cursos->find($curso_id))
+			{
+				$curso = Curso::find($curso_id);
+
+				$curso->estudiantes()->detach();
+
+				$curso->delete();
+
+				return $this->crearRespuesta('Curso eliminado', 200);
+			}
+			return $this->crearRespuestaError('No existe un curso con este id asociado a este profesor', 404);
+
+		}
+		return $this->crearRespuestaError('No existe un profesor con el id dado', 404);
 	}
 
 	public function validacion($request)

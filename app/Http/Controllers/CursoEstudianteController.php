@@ -48,8 +48,24 @@ class CursoEstudianteController extends Controller
 		return $this->crearRespuestaError('No se puede encontrar un curso con el id dado', 404);
 	}
 
-	public function destroy()
+	public function destroy($curso_id, $estudiante_id)
 	{
-		return 'desde destroy en cursoestudiantecontroller';
+		$curso = Curso::find($curso_id);
+
+		if($curso)
+		{
+			$estudiantes = $curso->estudiantes();
+
+			if($estudiantes->find($estudiante_id))
+			{
+				$estudiantes->detach($estudiante_id);
+
+				return $this->crearRespuesta('El estudiante de eliminó', 200);
+			}
+
+			return $this->crearRespuestaError('No existe un estudiante con el id dado en este curso', 404);
+		}
+
+		return $this->crearRespuestaError('No se puede encontrar un curso con el id dado', 404);
 	}
 }
