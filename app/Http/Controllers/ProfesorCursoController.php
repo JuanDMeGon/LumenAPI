@@ -1,10 +1,21 @@
 <?php namespace App\Http\Controllers;
 
+use App\Profesor;
+
 class ProfesorCursoController extends Controller
 {
-	public function index()
+	public function index($profesor_id)
 	{
-		return 'desde index en profesorcursocontroller';
+		$profesor = Profesor::find($profesor_id);
+
+		if($profesor)
+		{
+			$cursos = $profesor->cursos;
+
+			return $this->crearRespuesta($cursos, 200);
+		}
+
+		return $this->crearRespuestaError('No se puede encontrar un profesor con el id dado', 404);
 	}
 
 	public function update()
