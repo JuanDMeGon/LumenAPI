@@ -1,5 +1,7 @@
 <?php
 
+class_alias(Illuminate\Support\Facades\Config::class, 'Config');
+
 require_once __DIR__.'/../vendor/autoload.php';
 
 Dotenv::load(__DIR__.'/../');
@@ -55,13 +57,14 @@ $app->singleton(
 |
 */
 
-// $app->middleware([
+$app->middleware([
+	LucaDegasperi\OAuth2Server\Middleware\OAuthExceptionHandlerMiddleware::class
 //     // Illuminate\Cookie\Middleware\EncryptCookies::class,
 //     // Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
 //     // Illuminate\Session\Middleware\StartSession::class,
 //     // Illuminate\View\Middleware\ShareErrorsFromSession::class,
 //     // Laravel\Lumen\Http\Middleware\VerifyCsrfToken::class,
-// ]);
+]);
 
 // $app->routeMiddleware([
 
@@ -80,6 +83,8 @@ $app->singleton(
 
 // $app->register(App\Providers\AppServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
+$app->register(LucaDegasperi\OAuth2Server\Storage\FluentStorageServiceProvider::class);
+$app->register(Optimus\OAuth2Server\OAuth2ServerServiceProvider::class);
 
 /*
 |--------------------------------------------------------------------------
