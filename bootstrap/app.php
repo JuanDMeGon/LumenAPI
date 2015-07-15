@@ -1,7 +1,5 @@
 <?php
 
-class_alias(Illuminate\Support\Facades\Config::class, 'Config');
-
 require_once __DIR__.'/../vendor/autoload.php';
 
 Dotenv::load(__DIR__.'/../');
@@ -21,6 +19,7 @@ $app = new Laravel\Lumen\Application(
 	realpath(__DIR__.'/../')
 );
 
+class_alias(Illuminate\Support\Facades\Config::class, 'Config');
 $app->withFacades();
 
 $app->withEloquent();
@@ -66,9 +65,9 @@ $app->middleware([
 //     // Laravel\Lumen\Http\Middleware\VerifyCsrfToken::class,
 ]);
 
-// $app->routeMiddleware([
-
-// ]);
+$app->routeMiddleware([
+	'oauth' => Optimus\OAuth2Server\Middleware\OAuthMiddleware::class,
+]);
 
 /*
 |--------------------------------------------------------------------------

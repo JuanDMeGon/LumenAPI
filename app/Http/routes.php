@@ -40,3 +40,8 @@ $app->delete('/profesores/{profesores}/cursos/{cursos}', 'ProfesorCursoControlle
 $app->get('/cursos/{cursos}/estudiantes', 'CursoEstudianteController@index');
 $app->post('/cursos/{cursos}/estudiantes/{estudiantes}', 'CursoEstudianteController@store');
 $app->delete('/cursos/{cursos}/estudiantes/{estudiantes}', 'CursoEstudianteController@destroy');
+
+
+$app->post('/oauth/access_token', function() use($app) {
+    return response()->json($app->make('oauth2-server.authorizer')->issueAccessToken());
+});
