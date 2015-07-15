@@ -7,6 +7,12 @@ use Illuminate\Http\Request;
 
 class ProfesorCursoController extends Controller
 {
+
+	public function __construct()
+	{
+		$this->middleware('oauth', ['except' => ['index']]);
+	}
+
 	public function index($profesor_id)
 	{
 		$profesor = Profesor::find($profesor_id);
