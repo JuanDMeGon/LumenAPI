@@ -35,5 +35,6 @@ $factory->define(App\Curso::class, function ($faker) {
         'titulo' => $faker->sentence(4),
         'descripcion' => $faker->paragraph(4),
 		'valor' => $faker->numberBetween(1,4),
+        'profesor_id' => mt_rand(1, 50)
     ];
 });
