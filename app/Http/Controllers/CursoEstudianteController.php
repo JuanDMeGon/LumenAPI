@@ -13,16 +13,12 @@ class CursoEstudianteController extends Controller
 
 	public function index($curso_id)
 	{
-		$curso = Curso::find($curso_id);
+		$curso = $this->buscar(Curso::class, $curso_id);
 
-		if($curso)
-		{
-			$estudiantes = $curso->estudiantes;
 
-			return $this->crearRespuesta($estudiantes, 200);
-		}
+		$estudiantes = $curso->estudiantes;
 
-		return $this->crearRespuestaError('No se puede encontrar un curso con el id dado', 404);
+		return $this->crearRespuesta($estudiantes, 200);
 	}
 
 	public function store($curso_id, $estudiante_id)

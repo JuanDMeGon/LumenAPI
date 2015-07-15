@@ -15,16 +15,11 @@ class ProfesorCursoController extends Controller
 
 	public function index($profesor_id)
 	{
-		$profesor = Profesor::find($profesor_id);
+		$profesor = $this->buscar(Profesor::class, $profesor_id);
+			
+		$cursos = $profesor->cursos;
 
-		if($profesor)
-		{
-			$cursos = $profesor->cursos;
-
-			return $this->crearRespuesta($cursos, 200);
-		}
-
-		return $this->crearRespuestaError('No se puede encontrar un profesor con el id dado', 404);
+		return $this->crearRespuesta($cursos, 200);
 	}
 
 	public function store(Request $request, $profesor_id)

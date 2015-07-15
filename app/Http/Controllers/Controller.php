@@ -4,6 +4,8 @@ use Laravel\Lumen\Routing\Controller as BaseController;
 
 use Illuminate\Http\Request;
 
+use Symfony\Component\Translation\Exception\NotFoundResourceException;
+
 class Controller extends BaseController
 {
     public function crearRespuesta($datos, $codigo)
@@ -19,5 +21,18 @@ class Controller extends BaseController
     protected function buildFailedValidationResponse(Request $request, array $errors)
     {
         return $this->crearRespuestaError($errors, 422);
+    }
+
+    public function buscar($modelo, $id)
+    {
+        $instancia = call_user_func("$modelo::find", $id);
+
+        if($instancia)
+        {
+            return $instancia;
+        }
+
+        throw new NotFoundResourceException;
+        
     }
 }

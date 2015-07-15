@@ -20,12 +20,9 @@ class ProfesorController extends Controller
 
 	public function show($id)
 	{
-		$profesor = Profesor::find($id);
+		$profesor = $this->buscar(Profesor::class, $id);
 
-		if($profesor)
-		{
-			return $this->crearRespuesta($profesor, 200);
-		}
+		return $this->crearRespuesta($profesor, 200);
 
 		return $this->crearRespuestaError('Profesor no encontrado', 404);
 	}

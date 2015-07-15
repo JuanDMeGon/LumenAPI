@@ -20,14 +20,9 @@ class EstudianteController extends Controller
 
 	public function show($id)
 	{
-		$estudiante = Estudiante::find($id);
+		$estudiante = $this->buscar(Estudiante::class, $id);
 
-		if($estudiante)
-		{
-			return $this->crearRespuesta($estudiante, 200);
-		}
-
-		return $this->crearRespuestaError('Estudiante no encontrado', 404);
+		return $this->crearRespuesta($estudiante, 200);
 	}
 
 	public function store(Request $request)

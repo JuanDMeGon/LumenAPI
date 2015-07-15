@@ -12,13 +12,8 @@ class CursoController extends Controller
 
 	public function show($id)
 	{
-		$curso = Curso::find($id);
-
-		if($curso)
-		{
-			return $this->crearRespuesta($curso, 200);
-		}
-
-		return $this->crearRespuestaError('Curso no encontrado', 404);
+		$curso = $this->buscar(Curso::class, $id);
+		
+		return $this->crearRespuesta($curso, 200);
 	}
 }

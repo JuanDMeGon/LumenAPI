@@ -4,6 +4,7 @@ use Exception;
 use Laravel\Lumen\Exceptions\Handler as ExceptionHandler;
 
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Translation\Exception\NotFoundResourceException;
 
 class Handler extends ExceptionHandler {
 
@@ -38,6 +39,11 @@ class Handler extends ExceptionHandler {
      */
     public function render($request, Exception $e)
     {
+        if($e instanceof NotFoundResourceException)
+        {
+            return response()->json(['message' => 'Recurso no encontrado', 'code' => 404], 404);
+        }
+        
         if(env('APP_DEBUG'))
         {
             return parent::render($request, $e);
