@@ -1,4 +1,4 @@
-## RESTful API con Lumen (Framework PHP)
+## RESTful API con Lumen (Micro Framework PHP)
 
 Este repositorio contiene el código fuente de los resultados del curso de "Crea una API RESTful con Lumen y Homestead de Laravel".
 
@@ -11,4 +11,4 @@ Esta API es sobre Estudiantes, Profesores y Cursos.
 
 ## Dirección oficial del curso
 
-[Crea una API RESTful con Lumen Y Homestead de Laravel](XXXX).
+[Crea una API RESTful con Lumen Y Homestead de Laravel](https://www.udemy.com/api-restful-lumen-homestead-laravel/?couponCode=git).
