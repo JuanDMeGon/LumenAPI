@@ -18,7 +18,7 @@ class ProfesorMigration extends Migration
             $table->string('direccion');
             $table->string('telefono');
             $table->string('profesion');
-            $table->timestamps();
+            $table->nullableTimestamps();
         });
     }
 

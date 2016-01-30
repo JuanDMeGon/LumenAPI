@@ -19,7 +19,7 @@ class CursoMigration extends Migration
             $table->integer('valor');
             $table->integer('profesor_id')->unsigned();
             $table->foreign('profesor_id')->references('id')->on('profesores');
-            $table->timestamps();
+            $table->nullableTimestamps();
         });
     }
 

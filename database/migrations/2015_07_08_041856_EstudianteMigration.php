@@ -18,7 +18,7 @@ class EstudianteMigration extends Migration
             $table->string('direccion');
             $table->string('telefono');
             $table->string('carrera');
-            $table->timestamps();
+            $table->nullableTimestamps();
         });
     }
 

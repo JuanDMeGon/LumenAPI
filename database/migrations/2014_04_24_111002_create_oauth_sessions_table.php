@@ -1,11 +1,25 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
-use LucaDegasperi\OAuth2Server\Support\Migration;
+/*
+ * This file is part of OAuth 2.0 Laravel.
+ *
+ * (c) Luca Degasperi <packages@lucadegasperi.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+/**
+ * This is the create oauth sessions table migration class.
+ *
+ * @author Luca Degasperi <packages@lucadegasperi.com>
+ */
 class CreateOauthSessionsTable extends Migration
 {
-
     /**
      * Run the migrations.
      *
@@ -13,13 +27,13 @@ class CreateOauthSessionsTable extends Migration
      */
     public function up()
     {
-        $this->schema()->create('oauth_sessions', function (Blueprint $table) {
+        Schema::create('oauth_sessions', function (Blueprint $table) {
             $table->increments('id');
             $table->string('client_id', 40);
             $table->enum('owner_type', ['client', 'user'])->default('user');
             $table->string('owner_id');
             $table->string('client_redirect_uri')->nullable();
-            $table->timestamps();
+            $table->nullableTimestamps();
 
             $table->index(['client_id', 'owner_type', 'owner_id']);
 
@@ -37,9 +51,9 @@ class CreateOauthSessionsTable extends Migration
      */
     public function down()
     {
-        $this->schema()->table('oauth_sessions', function (Blueprint $table) {
+        Schema::table('oauth_sessions', function (Blueprint $table) {
             $table->dropForeign('oauth_sessions_client_id_foreign');
         });
-        $this->schema()->drop('oauth_sessions');
+        Schema::drop('oauth_sessions');
     }
 }

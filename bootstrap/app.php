@@ -2,7 +2,14 @@
 
 require_once __DIR__.'/../vendor/autoload.php';
 
-Dotenv::load(__DIR__.'/../');
+try
+{
+    (new Dotenv\Dotenv(__DIR__.'/../'))->load();
+}
+catch (Dotenv\Exception\InvalidPathException $e)
+{
+    //
+}
 
 /*
 |--------------------------------------------------------------------------
@@ -57,7 +64,7 @@ $app->singleton(
 */
 
 $app->middleware([
-	LucaDegasperi\OAuth2Server\Middleware\OAuthExceptionHandlerMiddleware::class
+	\LucaDegasperi\OAuth2Server\Middleware\OAuthExceptionHandlerMiddleware::class
 //     // Illuminate\Cookie\Middleware\EncryptCookies::class,
 //     // Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
 //     // Illuminate\Session\Middleware\StartSession::class,
@@ -66,7 +73,7 @@ $app->middleware([
 ]);
 
 $app->routeMiddleware([
-	'oauth' => Optimus\OAuth2Server\Middleware\OAuthMiddleware::class,
+	'oauth' => \LucaDegasperi\OAuth2Server\Middleware\OAuthMiddleware::class,
 ]);
 
 /*
@@ -82,8 +89,8 @@ $app->routeMiddleware([
 
 // $app->register(App\Providers\AppServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
-$app->register(LucaDegasperi\OAuth2Server\Storage\FluentStorageServiceProvider::class);
-$app->register(Optimus\OAuth2Server\OAuth2ServerServiceProvider::class);
+$app->register(\LucaDegasperi\OAuth2Server\Storage\FluentStorageServiceProvider::class);
+$app->register(\LucaDegasperi\OAuth2Server\OAuth2ServerServiceProvider::class);
 
 /*
 |--------------------------------------------------------------------------
