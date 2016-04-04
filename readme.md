@@ -11,4 +11,6 @@ Esta API es sobre Estudiantes, Profesores y Cursos.
 
 ## Dirección oficial del curso
 
-[Crea una API RESTful con Lumen Y Homestead de Laravel](https://www.udemy.com/api-restful-lumen-homestead-laravel/?couponCode=git).
+[Crea una API RESTful con Lumen Y Homestead de Laravel](https://www.udemy.com/api-restful-lumen-homestead-laravel/?couponCode=new-social).
+
+Actualmente el curso y la API con compatibles con Lumen 5.2.
