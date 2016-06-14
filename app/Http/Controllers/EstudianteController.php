@@ -81,7 +81,7 @@ class EstudianteController extends Controller
 		[
 			'nombre' => 'required',
 			'direccion' => 'required',
-			'telefono' => 'required|numeric',
+			'telefono' => 'required',
 			'carrera' => 'required|in:ingeniería,matemática,física',
 		];
 

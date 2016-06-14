@@ -86,7 +86,7 @@ class ProfesorController extends Controller
 		[
 			'nombre' => 'required',
 			'direccion' => 'required',
-			'telefono' => 'required|numeric',
+			'telefono' => 'required',
 			'profesion' => 'required|in:ingeniería,matemática,física',
 		];
 
