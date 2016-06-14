@@ -51,18 +51,14 @@ class Handler extends ExceptionHandler {
         {
             return response()->json(['message' => 'Recurso no encontrado', 'code' => 404], 404);
         }
-        
-        if(env('APP_DEBUG'))
-        {
-            return parent::render($request, $e);
-        }
 
         if($e instanceof NotFoundHttpException)
         {
             return response()->json(['message' => 'Petición inválida', 'code' => 400], 400);
         }
 
-        return response()->json(['message' => 'Error inesperado, intentar más tarde', 'code' => 500], 500);   
-    }
+        return parent::render($request, $e);
 
+        //return response()->json(['message' => 'Error inesperado, intentar más tarde', 'code' => 500], 500);   
+    }
 }
